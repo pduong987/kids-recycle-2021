@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+.navbar-btn {
+  margin: 0 500px;
+}
+
+.search-bar {
+  margin: 50px 100px;
+}

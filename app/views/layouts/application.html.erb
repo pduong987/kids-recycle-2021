@@ -10,6 +10,11 @@
   </head>
 
   <body>
+
+    <%= render 'partials/navbar' %>
+    <%= render 'partials/search' %>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>
