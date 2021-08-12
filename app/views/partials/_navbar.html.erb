@@ -6,19 +6,24 @@
     <div class="collapse navbar-collapse navbar-btn" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listings/sell">Sell</a>
+          <a class="nav-link active" href="/listings/sell">Sell</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listings/index">Buy</a>
+          <a class="nav-link active" href="/listings/index">Buy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listings/swap">Swap</a>
+          <a class="nav-link active" href="/listings/swap">Swap</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listings/free">Free</a>
+          <a class="nav-link active" href="/listings/free">Free</a>
         </li>         
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/listings/free">Log in</a>
+        <% if user_signed_in? %>
+          <a class="nav-link active" href="/users/register">Logout</a>
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link"%>
+        <% else %>
+         <%= link_to 'Log In', new_user_session_path, class: "nav-link"%>
+        <% end %>
         </li>         
       </ul>  
     </div>

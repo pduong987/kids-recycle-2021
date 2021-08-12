@@ -1,5 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
+  #Log in come in listing only but not the home page
+  before_action :authenticate_user!
 
   # GET /listings or /listings.json
   def index
