@@ -10,9 +10,7 @@
     <%= f.input :status %>
     <%= f.input :location %>
     <%= f.input :create_at %>
-    <%= f.input :buyer_id %>
-    <%= f.input :seller_id %>
-    <%= f.association :profile %>
+    <%= f.file_field :pictures, multiple: true %>
   </div>
 
   <div class="form-actions">

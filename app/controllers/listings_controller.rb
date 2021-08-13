@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
-  #Log in come in listing only but not the home page
-  before_action :authenticate_user!
+  #Log in come in listing only but not the home
+  # before_action :authenticate_user!
 
   # GET /listings or /listings.json
   def index
@@ -14,7 +14,18 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
+    #If user is login then redirect to the login page
+    #else redirect to the sell form page
+    if user_signed_in?
+      # if user has created a profile, show the sell page , else redirect to creating profile page 
+      if current_user.profile
     @listing = Listing.new
+      else
+        redirect_to new_profile_path
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /listings/1/edit
@@ -24,6 +35,8 @@ class ListingsController < ApplicationController
   # POST /listings or /listings.json
   def create
     @listing = Listing.new(listing_params)
+
+    @listing.seller_id = current_user.profile.id
 
     respond_to do |format|
       if @listing.save
@@ -66,6 +79,6 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:title, :description, :price, :status, :location, :create_at, :buyer_id, :seller_id, :profile_id)
+      params.require(:listing).permit(:title, :description, :price, :status, :location, :create_at, :buyer_id, :seller_id, :profile_id, pictures: [])
     end
 end
