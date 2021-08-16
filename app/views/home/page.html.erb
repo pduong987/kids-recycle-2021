@@ -1,3 +1,23 @@
 <h1>Home#page</h1>
 <p>Find me in app/views/home/page.html.erb</p>
-<%= image_tag "children_home.jpg", class: "home-page-img"%>
+
+<div class="row">
+    <% @listings.each do |item| %>
+        <div class="col-md-3">
+            <div class="card">
+            
+            <% if item.pictures && item.pictures.first%>
+                <%= image_tag item.pictures.first, class: "card-img-top" %>
+            <% else %>
+                <%= image_tag "no-img.jpeg", class: "card-img-top" %>
+            <% end %> 
+               
+            </div>
+            <div calss="card-body">
+                <p class="card-text"><% item.title %></p>
+                <p>$<%= item.price %></p>
+                <%= link_to 'Detail',listing_path(item.id), class:"btn btn-primary"%>
+            </div>
+        </div>  
+    <% end %>
+</div>
