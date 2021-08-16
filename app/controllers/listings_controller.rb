@@ -5,13 +5,20 @@ class ListingsController < ApplicationController
 
   # GET /listings or /listings.json
   def index
-    @listings = Listing.all
-
-    
+    @listings = Listing.where("price > ?", 0.0)
   end
 
   # GET /listings/1 or /listings/1.json
   def show
+
+    @listing = Listing.find(params[:id])
+
+  end
+
+  def free
+
+    @listings = Listing.where("price <= ?", 0.0)
+
   end
 
   # GET /listings/new
@@ -76,7 +83,7 @@ class ListingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
-      @listing = Listing.find(params[:id])
+     # @listing = Listing.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

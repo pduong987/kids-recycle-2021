@@ -16,7 +16,7 @@
             <div calss="card-body">
                 <p class="card-text"><% item.title %></p>
                 <p>$<%= item.price %></p>
-                <%= link_to 'Detail',listing_path(item.id), class:"btn btn-primary"%>
+                <%= link_to 'Detail',listings_path(item.id), class:"btn btn-primary"%>
             </div>
         </div>  
     <% end %>
