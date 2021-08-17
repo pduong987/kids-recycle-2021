@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 
-<h1>All Listings</h1>
+<h1>All Items</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Picture</th>
@@ -32,9 +31,9 @@
         <td><%= listing.buyer_id %></td>
         <td><%= listing.seller_id %></td>
         <td><%= listing.profile_id %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', listing, class: "btn btn-success" %></td>
+        <td><%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-warning" %></td>
+        <td><%= link_to 'Delete', listing, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

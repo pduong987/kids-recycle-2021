@@ -8,6 +8,8 @@ class ListingsController < ApplicationController
 
     if(free == "true" || free == true)
       @listings = Listing.where("price <= ?", 0.0)
+
+      render "free"
     else
       @listings = Listing.where("price > ?", 0.0)
     end
@@ -52,16 +54,6 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
 
   end  
-
-  def swap
-  end
-
-  def doswap
-    
-    # similar code to "update" action, returning JSON to form
-    # No need for doswap view
-
-  end
 
   def edit
     @listing = Listing.find(params[:id])

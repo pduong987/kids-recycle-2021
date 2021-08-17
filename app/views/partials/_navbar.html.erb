@@ -1,32 +1,29 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-      
-        <a href="/" class="btn btn-danger" role="button">Kids Recycle</a>
-
-
-    <div class="collapse navbar-collapse navbar-btn" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-         
+    <a class="navbar-brand btn btn-danger text-white btn-sm" href="/">Kid's Recycle</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto text-light mt-1">
+          <li class="nav-item">
           <%= link_to "Sell", "/listings/new", class: "nav-link active" %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/listings">Buy</a>
+       <li class="nav-item">
+          <%= link_to "Buy", "/listings", class: "nav-link active" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/listings/swap">Swap</a>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Free", "/listings?free=true", class: "nav-link active"%>
-        </li>         
-        <li class="nav-item">
+          <%= link_to "Free", "/listings?free=true", class: "nav-link active" %>
+        </li> 
+          <li class="nav-item">
         <% if user_signed_in? %>
           <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link"%>
         <% else %>
          <%= link_to 'Log In', new_user_session_path, class: "nav-link"%>
         <% end %>
-        </li>         
-      </ul>  
+        </li>    
+      </ul>
     </div>
   </div>
 </nav>
