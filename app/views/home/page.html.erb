@@ -2,21 +2,21 @@
 <p>Find me in app/views/home/page.html.erb</p>
 
 <div class="row">
-    <% @listings.each do |item| %>
+    <% @listings.each do |listing| %>
         <div class="col-md-3">
             <div class="card">
             
-            <% if item.pictures && item.pictures.first%>
-                <%= image_tag item.pictures.first, class: "card-img-top" %>
+            <% if listing.pictures && listing.pictures.first%>
+                <%= image_tag listing.pictures.first, class: "card-img-top" %>
             <% else %>
                 <%= image_tag "no-img.jpeg", class: "card-img-top" %>
             <% end %> 
                
             </div>
             <div calss="card-body">
-                <p class="card-text"><% item.title %></p>
-                <p>$<%= item.price %></p>
-                <%= link_to 'Detail',listings_path(item.id), class:"btn btn-primary"%>
+                <p class="card-text"><% listing.title %></p>
+                <p>$<%= listing.price %></p>
+                <%= link_to 'Detail',listing_path(listing), class:"btn btn-primary"%>
             </div>
         </div>  
     <% end %>
