@@ -53,6 +53,16 @@ class ListingsController < ApplicationController
 
   end  
 
+  def swap
+  end
+
+  def doswap
+    
+    # similar code to "update" action, returning JSON to form
+    # No need for doswap view
+
+  end
+
   def edit
     @listing = Listing.find(params[:id])
   end

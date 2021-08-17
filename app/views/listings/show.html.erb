@@ -50,5 +50,11 @@
   <%= @listing.profile_id %>
 </p>
 
+<%if user_signed_in?%>
+  <button>BUY ME</button>
+<% else %>
+  <p>You need to login firsT!!!!</p>
+<% end %>
+
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <%= link_to 'Back', listings_path %>
