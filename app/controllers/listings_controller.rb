@@ -52,10 +52,13 @@ class ListingsController < ApplicationController
 
   def show
 
+    @listing = Listing.find(params[:id])
+
     if params[:checkout] == "success"
 
       @listing.buyer_id = current_user.profile.id
       @listing.save
+    end
 
   end  
 
