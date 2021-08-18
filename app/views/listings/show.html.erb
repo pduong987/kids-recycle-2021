@@ -63,7 +63,7 @@
       <button class="btn btn-danger"> Sold</button>
     <% else %>
       <% if current_user && current_user.profile %>
-        <%= link_to 'buy', root_path, class: "btn btn-danger"%>
+        <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-danger"%>
       <% end %>
     <% end %>
 <% end %>

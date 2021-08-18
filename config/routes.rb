@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   
-  # Custom override routes. Need to be above listing resource
-  get 'listings/swap', to: 'listings#swap'
-  post 'listings/swap', to: 'listings#doswap'
+  post 'payment/page', to: "payment#create", as: 'payment'
 
   resources :reviews
   resources :listings
