@@ -20,7 +20,12 @@
         <% if user_signed_in? %>
           <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link"%>
         <% else %>
-         <%= link_to 'Log In', new_user_session_path, class: "nav-link"%>
+        <li class="nav-item">
+          <%= link_to 'Log In', new_user_session_path(user_type: "returning_user"), class: "nav-link"%>
+         </li>
+        <li class="nav-item">
+          <%= link_to 'Register to Buy', new_user_registration_path(user_type: "buyer"), class: "nav-link"%>
+         </li>
         <% end %>
         </li>    
       </ul>

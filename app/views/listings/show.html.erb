@@ -50,11 +50,23 @@
   <%= @listing.profile_id %>
 </p>
 
-<%if user_signed_in?%>
-  <button>BUY ME</button>
+<%# <%if user_signed_in?%>
+  <%# <button>BUY ME</button> %>
+<%# <% else %>
+  <%# <p>You need to login firsT!!!!</p> %>
+<%# <% end %>
+
+<% if(current_user && current_user.profile && (current_user.profile.id == @listing.seller.id)) %>
+    <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-warning" %> 
 <% else %>
-  <p>You need to login firsT!!!!</p>
+    <% if @listing.buyer %>
+      <button class="btn btn-danger"> Sold</button>
+    <% else %>
+      <% if current_user && current_user.profile %>
+        <%= link_to 'buy', root_path, class: "btn btn-danger"%>
+      <% end %>
+    <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+
+<%= link_to 'Back', listings_path, class: "btn btn-primary" %>

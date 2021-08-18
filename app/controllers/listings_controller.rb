@@ -15,6 +15,21 @@ class ListingsController < ApplicationController
     end
 
   end
+  
+  def new
+      #If user is login then redirect to the login page
+      #else redirect to the sell form page
+      if user_signed_in?
+        # if user has created a profile, show the sell page , else redirect to creating profile page 
+        if current_user.profile
+          @listing = Listing.new
+        else
+          redirect_to new_profile_path
+        end
+      else
+        redirect_to new_user_session_path
+      end    
+  end
 
   def create
 
@@ -34,20 +49,6 @@ class ListingsController < ApplicationController
 
   end
 
-  def new
-      #If user is login then redirect to the login page
-      #else redirect to the sell form page
-      if user_signed_in?
-        # if user has created a profile, show the sell page , else redirect to creating profile page 
-        if current_user.profile
-      @listing = Listing.new
-        else
-          redirect_to new_profile_path
-        end
-      else
-        redirect_to new_user_session_path
-      end    
-  end
 
   def show
 
