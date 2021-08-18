@@ -6,7 +6,7 @@ class PaymentController < ApplicationController
     if ENV['RAILS_ENV'] == "development"
       root_path = "http://localhost:3000"
     else
-      root_path = ENV['ROOT_PATH']
+      root_path = ENV['RAILS_ROOT_PATH']
     end
 
     #implement stripe code
@@ -25,8 +25,8 @@ class PaymentController < ApplicationController
         }],
         mode: 'payment',
         # These placeholder URLs will be replaced in a following step.
-        success_url: "http://localhost:3000/listings/#{@listing.id}?checkout=success",
-        cancel_url: 'http://localhost:3000/payment/cancel',
+        success_url: "#{root_path}/listings/#{@listing.id}?checkout=success",
+        cancel_url: "#{root_path}/payment/cancel",
       })
     
       redirect_to session.url
