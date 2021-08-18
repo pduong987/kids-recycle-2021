@@ -12,6 +12,8 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
+    puts "Hi"
+    puts params[:user_type]
     @user_type = params[:user_type] if params[:user_type]
     @profile = Profile.new
   end
@@ -24,9 +26,11 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
+  
 
     respond_to do |format|
       if @profile.save
+       
         if params[:profile][:user_type] == "buyer"
           format.html { redirect_to root_path, notice: "Profile was successfully created." }
         else
@@ -70,6 +74,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :user_name, :user_id, :user_type)
+      params.require(:profile).permit(:first_name, :last_name, :user_name, :user_id)
     end
 end
