@@ -8,11 +8,18 @@ class ListingsController < ApplicationController
     free = params[:free]
 
     if(free == "true" || free == true)
+
       @listings = Listing.where("price <= ?", 0.0)
 
       render "free"
     else
-      @listings = Listing.where("price > ?", 0.0)
+
+
+      @q = Listing.ransack(params[:q])
+     
+      @listings = @q.result
+
+      #@listings = Listing.where("price > ?", 0.0)
     end
 
   end
