@@ -15,10 +15,11 @@
   <body>
 
     <%= render 'partials/navbar' %>
-      
+     <div class="container"> 
     <p class="alert"><%= alert %></p>
     <%= yield %>
-   
+   </div>
 
   </body>
+    <%= render 'partials/footer' %>
 </html>
