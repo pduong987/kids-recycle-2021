@@ -12,8 +12,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/new
   def new
-    puts "Hi"
-    puts params[:user_type]
+   
     @user_type = params[:user_type] if params[:user_type]
     @profile = Profile.new
   end
@@ -31,12 +30,14 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.save
        
-        if params[:profile][:user_type] == "buyer"
-          format.html { redirect_to root_path, notice: "Profile was successfully created." }
-        else
-          format.html { redirect_to new_listing_path, notice: "Profile was successfully created." }
-        end
-        format.json { render :show, status: :created, location: @profile }
+        format.html { redirect_to root_path, notice: "Profile was successfully created." }
+
+        # if params[:profile][:user_type] == "buyer"
+        #   format.html { redirect_to root_path, notice: "Profile was successfully created." }
+        # else
+        #   format.html { redirect_to new_listing_path, notice: "Profile was successfully created." }
+        # end
+        # format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
