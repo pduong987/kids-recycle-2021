@@ -1,30 +1,53 @@
+<%= render 'partials/showcase' %>
 
 <div class="container">
-<div class="centered">
-  <h1 class="text-white"><small>Welcome to Kids's Recycle society</small></h1>
-</div>
-</div>
-<br>
-<br>
-<br>
+    <%# Use Grid to style the content %>
+  <div class="row">
+    <div class="col">
+      
+    </div>
+    <div class="col col-lg-12 col-sm-12">
 
-<div class="row">
-    <% @listings.each do |listing| %>
-        <div class="col-md-3">
-            <div class="card">
+        <div class="container">
+           
+            <% # ADD THIS TO DOUBLE UP ARRAYL @listings = @listings + @listings + @listings + @listings%>
+            <% @listing_arrays = @listings.each_slice(4).to_a %>
+            <% @listing_arrays.each do |listing_array| %>
+                <div class="row">
+
+                    <% listing_array.each do |listing| %>
+
+                        <div class="col col-lg-3 col-sm-3">
+
+                            <div class="card" style="margin-bottom: 20px;">
+                                <%# Loading listings picture %>
+                                <% if listing.pictures && listing.pictures.first%>
+                                    <%= image_tag listing.pictures.first, class: "card-img-top" %>
+                                <% else %>
+                                    <%= image_tag "no-img.jpeg", class: "card-img-top" %>
+                                <% end %> 
+                                <%# Reduce description and title text  %>
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= truncate listing.title, length: 10%>: $<%= listing.price %></h5>
+                                    <p class="card-text"><%= truncate listing.description, length: 30%></p>
+                                    <%= link_to 'Detail',listing_path(listing), class:"btn btn-primary"%>
+                                </div>
+                            </div>
+
+                        </div>  
+                    <%end%>
+
+                </div>
+                
+            <%end%>
             
-            <% if listing.pictures && listing.pictures.first%>
-                <%= image_tag listing.pictures.first, class: "card-img-top" %>
-            <% else %>
-                <%= image_tag "no-img.jpeg", class: "card-img-top" %>
-            <% end %> 
-               
-            </div>
-            <div calss="card-body">
-                <p class="card-text"><% listing.title %></p>
-                <p>$<%= listing.price %></p>
-                <%= link_to 'Detail',listing_path(listing), class:"btn btn-primary"%>
-            </div>
-        </div>  
-    <% end %>
+        </div>
+
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
 </div>
+
+

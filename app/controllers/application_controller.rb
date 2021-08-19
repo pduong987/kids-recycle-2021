@@ -1,8 +1,5 @@
 class ApplicationController < ActionController::Base
-      before_action :set_user
-      def set_user
-        @user_type = params[:user_type]
-      end
+  
         # the after sign in action will allow the seller to create a profile if doesn't have one, and then redirect it to the new food item to add to its listing
       def after_sign_in_path_for(profile)
         if (current_user.profile)

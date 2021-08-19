@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   post 'payment/page', to: "payment#create", as: 'payment'
+  
 
   resources :reviews
   resources :listings
