@@ -1,5 +1,6 @@
 <%= render 'partials/showcase' %>
 
+<br /> <br />
 <div class="container">
     <%# Use Grid to style the content %>
   <div class="row">
@@ -8,7 +9,7 @@
     </div>
     <div class="col col-lg-12 col-sm-12">
 
-        <div class="container">
+        <div class="container ">
            
             <% # ADD THIS TO DOUBLE UP ARRAYL @listings = @listings + @listings + @listings + @listings%>
             <% @listing_arrays = @listings.each_slice(4).to_a %>
