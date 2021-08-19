@@ -1,7 +1,21 @@
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-2 col-sm-1">
+      
+    </div>
+    <div class="col col-lg-8 col-sm-10">
+    <br />
+    <br />
+    <br />
 <p id="notice"><%= notice %></p>
 
 <% @listing.pictures.each do |picture|%>
-  <%= image_tag picture %>
+  <%= image_tag picture, style: "max-width: 300px"%>
 
 <% end %>
 
@@ -63,7 +77,7 @@
     <%# When the listing has a buyer, show as sold %>
     <% if @listing.buyer %>
       <button class="btn btn-danger"> Sold</button>
-    <% else %>
+    <% elsif @listing.price > 0 %>
       <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-danger"%>
     <%end%>
 
@@ -77,3 +91,9 @@
 
 
 <%= link_to 'Back', listings_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col col-lg-2 col-sm-1">
+      
+    </div>
+  </div>
+</div>
