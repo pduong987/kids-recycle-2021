@@ -11,15 +11,12 @@ class ListingsController < ApplicationController
 
       @listings = Listing.where("price <= ?", 0.0)
 
-      render "free"
     else
-
 
       @q = Listing.ransack(params[:q])
      
       @listings = @q.result
 
-      #@listings = Listing.where("price > ?", 0.0)
     end
 
   end
