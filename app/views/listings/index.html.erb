@@ -30,7 +30,11 @@
         <tbody>
           <% @listings.each do |listing| %>
             <tr>
-              <td><%= image_tag listing.pictures.first, class: "img-thumbnail" %></td>
+              <td>
+                <% if listing.pictures && listing.pictures.first%>
+                  <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
+                <%end%>
+              </td>
               <td><%= listing.title %></td>
               <td><%= listing.description %></td>
               <td><%= listing.price %></td>

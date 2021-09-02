@@ -23,10 +23,8 @@
     <% @listings.each do |listing| %>
       <tr>
         <td>
-          <%if(listing.pictures.first != nil)%>
-          <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
-          <% else %>
-            NO_IMAGE
+          <% if listing.pictures && listing.pictures.first%>
+            <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
           <%end%>
         </td>
         <td><%= listing.title %></td>
