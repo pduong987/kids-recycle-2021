@@ -22,7 +22,13 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
-        <td><%= image_tag listing.pictures.first, class: "img-thumbnail" %></td>
+        <td>
+          <%if(listing.pictures.first != nil)%>
+          <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
+          <% else %>
+            NO_IMAGE
+          <%end%>
+        </td>
         <td><%= listing.title %></td>
         <td><%= listing.description %></td>
         <td>FREE  </td>
