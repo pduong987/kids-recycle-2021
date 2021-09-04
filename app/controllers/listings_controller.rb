@@ -75,13 +75,22 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
 
-      @listing = Listing.update(params[:id],listing_params)
-      if @listing
-        format.html { redirect_to @listing, notice: "Listing was successfully updated." }
-        format.json { render :show, status: :ok, location: @listing }
+      @listing = Listing.find(params[:id])
+
+      if current_user.profile == @listing.seller
+
+        @listing = Listing.update(params[:id],listing_params)
+        if @listing
+          format.html { redirect_to @listing, notice: "Listing was successfully updated." }
+          format.json { render :show, status: :ok, location: @listing }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @listing.errors, status: :unprocessable_entity }
+        end
+
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unauthorized }
+        format.json { render json: @listing.errors, status: :unauthorized }
       end
     end
 
@@ -91,13 +100,21 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
 
-      @listing = Listing.destroy(params[:id])
-      if @listing
-        format.html { redirect_to @listing, notice: "Listing was successfully destroyed." }
-        format.json { render :show, status: :ok, location: @listing }
+      @listing = Listing.find(params[:id])
+
+      if current_user.profile == @listing.seller
+
+        @listing = Listing.destroy(params[:id])
+        if @listing
+          format.html { redirect_to @listing, notice: "Listing was successfully destroyed." }
+          format.json { render :show, status: :ok, location: @listing }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @listing.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unauthorized }
+        format.json { render json: @listing.errors, status: :unauthorized }        
       end
     end
 
