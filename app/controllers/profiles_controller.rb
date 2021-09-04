@@ -32,12 +32,6 @@ class ProfilesController < ApplicationController
        
         format.html { redirect_to root_path, notice: "Profile was successfully created." }
 
-        # if params[:profile][:user_type] == "buyer"
-        #   format.html { redirect_to root_path, notice: "Profile was successfully created." }
-        # else
-        #   format.html { redirect_to new_listing_path, notice: "Profile was successfully created." }
-        # end
-        # format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
@@ -70,6 +64,8 @@ class ProfilesController < ApplicationController
 
   # DELETE /profiles/1 or /profiles/1.json
   def destroy
+
+    # Provided the current user owns this profile
     if current_user.profile == @profile
 
       @profile.destroy
@@ -77,7 +73,7 @@ class ProfilesController < ApplicationController
         format.html { redirect_to profiles_url, notice: "Profile was successfully destroyed." }
         format.json { head :no_content }
       end
-
+      # Otherwise return 401 Unauthorized
     else
       respond_to do |format|
         format.html { render :edit, status: :unauthorized }
@@ -86,6 +82,7 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # Add generic filters to permit profile fields
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile

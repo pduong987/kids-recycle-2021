@@ -1,4 +1,6 @@
 class PaymentController < ApplicationController
+ 
+  # Used to create a payment
   def create
 
     @listing = Listing.find(params[:listing_id])
@@ -9,7 +11,7 @@ class PaymentController < ApplicationController
       root_path = ENV['RAILS_ROOT_PATH']
     end
 
-    #implement stripe code
+    #implement stripe code and execute transaction
     Stripe.api_key = Rails.application.credentials.dig(:stripe_api_key)
       session = Stripe::Checkout::Session.create({
         payment_method_types: ['card'],
@@ -29,6 +31,7 @@ class PaymentController < ApplicationController
         cancel_url: "#{root_path}/payment/cancel",
       })
     
+      # Return user back to current page (Usually the sold item)
       redirect_to session.url
     end
   end
