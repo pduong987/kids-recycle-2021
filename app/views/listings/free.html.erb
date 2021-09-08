@@ -23,12 +23,16 @@
     <% @listings.each do |listing| %>
       <tr>
         <td>
+        <%# Make sure we grab the first image or show default no image placeholder %>
           <% if listing.pictures && listing.pictures.first%>
             <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
+          <%else%>
+            <%= image_tag "no-img.jpg", class: "img-thumbnail" %>
           <%end%>
         </td>
         <td><%= listing.title %></td>
-        <td><%= listing.description %></td>
+        <%# Truncate text so it does not overflow... %>
+        <td><%= (listing.description).truncate(20) %></td>
         <td>FREE  </td>
         <td><%= listing.status %></td>
         <td><%= listing.location %></td>

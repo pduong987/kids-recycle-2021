@@ -31,12 +31,17 @@
           <% @listings.each do |listing| %>
             <tr>
               <td>
+              <%# Grab the first image or show default no image placeholder. %>
                 <% if listing.pictures && listing.pictures.first%>
                   <%= image_tag listing.pictures.first, class: "img-thumbnail" %>
+                <%else%>
+                  <%= image_tag "no-img.jpg", class: "img-thumbnail" %>
                 <%end%>
               </td>
               <td><%= listing.title %></td>
-              <td><%= listing.description %></td>
+              <td><%= 
+                # Make sure we limit the description so its does not overflow... 
+                (listing.description).truncate(20) %></td>
               <td><%= listing.price %></td>
               <td><%= listing.status %></td>
               <td><%= listing.location %></td>
@@ -44,7 +49,9 @@
               <td><%= listing.create_at %></td>
               <td><%= listing.buyer_id %></td>
               <td><%= listing.seller_id %></td>
-              <td><%= link_to 'Detail', listing, class: "btn btn-success" %></td>
+              <td>
+                  <%= link_to 'Detail',listing_path(listing), class:"btn btn-success"%>
+              </td>
               <%end%>
             </tr>
           <% end %>
@@ -52,7 +59,7 @@
       </table>
 
       <br>
-
+      <%# Provided the user is logged in show new listing button %>
       <% if current_user && current_user.profile %>
       <%= link_to 'New Listing', new_listing_path %>
       <%end%>

@@ -14,10 +14,15 @@
     <br />
 <p id="notice"><%= notice %></p>
 
-<% @listing.pictures.each do |picture|%>
-  <%= image_tag picture, style: "max-width: 300px"%>
+<% if @listing.pictures && @listing.pictures.first%>
+  <% @listing.pictures.each do |picture|%>
+    <%= image_tag picture, style: "max-width: 180px"%>
+  <% end %>
+<% else %>
+  <%= image_tag "no-img.jpg", style: "max-width: 180px"%>                               
+<% end %> 
 
-<% end %>
+
 
 <p>
   <strong>Title:</strong>
@@ -44,45 +49,22 @@
   <%= @listing.location %>
 </p>
 
-<p>
-  <strong>Create at:</strong>
-  <%= @listing.create_at %>
-</p>
+<%# This bit of code is a b it dynamic. We want to ensure that the following rules are not broken
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @listing.buyer_id %>
-</p>
+1. Only allow the user to buy if they are not the seller
+2. Only allow edit or delete if the logged in user is seller
+3. Only allow Sold and Back if the item is sold %>
 
-<p>
-  <strong>Seller:</strong>
-  <%= @listing.seller.user_name %>
-</p>
-
-<p>
-  <strong>Profile:</strong>
-  <%= @listing.profile_id %>
-</p>
-
-<%# <%if user_signed_in?%>
-  <%# <button>BUY ME</button> %>
-<%# <% else %>
-  <%# <p>You need to login firsT!!!!</p> %>
-<%# <% end %>
-
-
-
-
-<% if current_user && current_user.profile %>
+<% if current_user && current_user.profile%>
     <%# When the listing has a buyer, show as sold %>
     <% if @listing.buyer %>
       <button class="btn btn-danger"> Sold</button>
-    <% elsif @listing.price > 0 %>
+    <% elsif @listing.price > 0 && current_user.id != @listing.seller.id%>
       <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-danger"%>
     <%end%>
 
     <%# We only show the buttons for edit and delete if the logged in user is the one who created this listing %>
-    <% if current_user && @listing.seller_id == current_user.profile.id%>
+    <% if current_user && @listing.seller_id == current_user.profile.id && @listing.buyer == nil%>
       <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-warning" %>
       <%= link_to 'Delete', @listing, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
     <%end%>
