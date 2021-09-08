@@ -53,7 +53,7 @@
 
 1. Only allow the user to buy if they are not the seller
 2. Only allow edit or delete if the logged in user is seller
-3. Only allow Sold and Back if the item is sold %>
+3. Only allow Sold, Edit, Delete and Back if the item is sold %>
 
 <% if current_user && current_user.profile%>
     <%# When the listing has a buyer, show as sold %>
@@ -64,7 +64,7 @@
     <%end%>
 
     <%# We only show the buttons for edit and delete if the logged in user is the one who created this listing %>
-    <% if current_user && @listing.seller_id == current_user.profile.id && @listing.buyer == nil%>
+    <% if current_user && @listing.seller_id == current_user.profile.id%>
       <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-warning" %>
       <%= link_to 'Delete', @listing, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
     <%end%>
