@@ -55,7 +55,7 @@
   <%# Otherwise it is still available %>
   <%else%>
     <%# If the logged in user is not the seller and this item has a price %>
-    <%if @listing.price > 0 && current_user.id != @listing.seller.id%>
+    <%if @listing.price != nil && @listing.price > 0 && current_user.id != @listing.seller.id%>
       <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-danger"%>
     <%end%>
   <%end%>
