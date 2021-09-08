@@ -49,30 +49,25 @@
   <%= @listing.location %>
 </p>
 
-<%# This bit of code is a b it dynamic. We want to ensure that the following rules are not broken
-
-1. Only allow the user to buy if they are not the seller
-2. Only allow edit or delete if the logged in user is seller
-3. Only allow Sold, Edit, Delete and Back if the item is sold %>
-
-<% if current_user && current_user.profile%>
-    <%# When the listing has a buyer, show as sold %>
-    <% if @listing.buyer %>
-      <button class="btn btn-danger"> Sold</button>
-    <% elsif @listing.price > 0 && current_user.id != @listing.seller.id%>
+  <%# If the item has been sold %>
+  <% if @listing.buyer%>  
+    <button class="btn btn-danger">Sold</button>
+  <%# Otherwise it is still available %>
+  <%else%>
+    <%# If the logged in user is not the seller and this item has a price %>
+    <%if @listing.price > 0 && current_user.id != @listing.seller.id%>
       <%= link_to 'buy', payment_path(listing_id: @listing.id), method: :post, class: "btn btn-danger"%>
     <%end%>
+  <%end%>
 
-    <%# We only show the buttons for edit and delete if the logged in user is the one who created this listing %>
-    <% if current_user && @listing.seller_id == current_user.profile.id%>
-      <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-warning" %>
-      <%= link_to 'Delete', @listing, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-    <%end%>
+  <%# If the logged in user is the seller, then let them Edit and Delete the item %>
+  <% if current_user && @listing.seller_id == current_user.profile.id%>
+    <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-warning" %>
+    <%= link_to 'Delete', @listing, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%end%>
 
-<%end%>
-
-
-<%= link_to 'Back', listings_path, class: "btn btn-primary" %>
+  <%# Everyone gets to go back in time.... :) %>
+  <%= link_to 'Back', listings_path, class: "btn btn-primary" %>
     </div>
     <div class="col col-lg-2 col-sm-1">
       
